@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="tabIcon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A visual exploration of Seattle Airbnb listing prices using a historical 2018 dataset.">
+  <title>Seattle Airbnb | Data Analysis</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="data/summary.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="#top"><span class="logo-mark">S</span> Seattle Airbnb <span>Analysis</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#overview">Overview</a>
+        <a href="#charts">Charts</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container" id="overview">
+      <div class="hero-text">
+        <div class="tag"><span class="tag-dot"></span> DATA VISUALIZATION PROJECT <span class="tag-year">2018 SNAPSHOT</span></div>
+        <h1>Seattle Airbnb<br><span>Price Analysis</span></h1>
+        <p>I explored a dataset of Seattle Airbnb listings to see how room type, property size, and guest capacity relate to nightly prices.</p>
+        <a class="hero-link" href="#charts">Explore the charts <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-note">
+        <span class="note-label">MAIN FINDING</span>
+        <div class="note-number">$99 <span>/ night</span></div>
+        <p>Median price for entire homes and apartments, compared with $55 for private rooms.</p>
+        <div class="note-bottom">Historical listing prices, not live rates</div>
+      </div>
+    </section>
+
+    <section class="container summary-section" aria-labelledby="summary-heading">
+      <div class="section-intro">
+        <div>
+          <span class="eyebrow">OVERVIEW</span>
+          <h2 id="summary-heading">A quick look at the data</h2>
+        </div>
+        <span class="muted">Seattle, Washington · December 2018</span>
+      </div>
+      <div class="stats">
+        <div class="stat-card"><span class="stat-label">Listings</span><strong id="listing-count">7,576</strong><span class="stat-detail">In selected room type</span></div>
+        <div class="stat-card"><span class="stat-label">Median nightly price</span><strong id="median-price">$88</strong><span class="stat-detail">USD, selected listings</span></div>
+        <div class="stat-card"><span class="stat-label">Listed under $150</span><strong id="under-150">81.3%</strong><span class="stat-detail">Share of selected listings</span></div>
+      </div>
+    </section>
+
+    <section class="container charts-section" id="charts" aria-labelledby="charts-heading">
+      <div class="section-intro charts-intro">
+        <div>
+          <span class="eyebrow">EXPLORATION</span>
+          <h2 id="charts-heading">What does the data show?</h2>
+          <p>Use the room type filter to compare different kinds of listings.</p>
+        </div>
+        <div class="filter">
+          <label for="room-filter">Room type</label>
+          <select id="room-filter">
+            <option value="All listings">All listings</option>
+            <option value="Entire home/apt">Entire home / apartment</option>
+            <option value="Private room">Private room</option>
+            <option value="Shared room">Shared room</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="chart-panel main-chart">
+        <div class="chart-heading">
+          <div><h3>Distribution of nightly prices</h3><p>Most listings are below $150 per night, although some are priced much higher.</p></div>
+          <span class="chart-badge" id="current-room">All listings</span>
+        </div>
+        <div class="histogram" id="histogram" aria-label="Nightly price distribution"></div>
+        <div class="chart-description">Listing price (USD) · Hover over a bar to see the number of listings.</div>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-panel">
+          <div class="chart-heading"><div><h3>Median price by room type</h3><p>Entire homes tend to cost more than private or shared rooms.</p></div></div>
+          <div class="horizontal-chart" id="room-chart"></div>
+          <div class="chart-description">USD per night · All 7,576 listings</div>
+        </div>
+        <div class="chart-panel">
+          <div class="chart-heading"><div><h3>Price by number of bedrooms</h3><p>Listings with more bedrooms generally have higher prices.</p></div></div>
+          <div class="horizontal-chart" id="bedroom-chart"></div>
+          <div class="chart-description">Median USD per night · All listings</div>
+        </div>
+      </div>
+
+      <div class="finding">
+        <div class="finding-marker">01 / FINDING</div>
+        <p>Room type and property size show clear differences in listing prices. These are associations in the dataset, not proof that any one feature causes the price difference.</p>
+      </div>
+    </section>
+
+    <section class="container model-section" id="about" aria-labelledby="about-heading">
+      <div class="section-intro">
+        <div><span class="eyebrow">ADDITIONAL ANALYSIS</span><h2 id="about-heading">Price relationships &amp; regression</h2></div>
+      </div>
+      <div class="model-layout">
+        <div class="chart-panel">
+          <div class="chart-heading"><div><h3>Correlation with listing price</h3><p>A value closer to 1 or -1 indicates a stronger linear relationship.</p></div></div>
+          <div class="correlation-chart" id="correlation-chart"></div>
+          <div class="chart-description">Pearson correlations · 6,101 complete records</div>
+        </div>
+        <div class="model-card">
+          <span class="eyebrow">LINEAR REGRESSION</span>
+          <h3>A simple model of listing prices</h3>
+          <div class="model-stats">
+            <div><strong id="test-r2">0.347</strong><span>Test R²</span></div>
+            <div><strong id="test-mae">$40.65</strong><span>Test MAE</span></div>
+          </div>
+          <p>The model uses bedrooms, bathrooms, guest capacity, reviews, and satisfaction ratings. Its results are based on a held-out 20% test set, so they are more useful than the original training score.</p>
+          <p class="model-note"></p>
+        </div>
+      </div>
+
+      <div class="methodology">
+        <div><h3>About this project</h3><p>This was originally a Python data visualization assignment. I cleaned the data, explored pricing differences, and tested a linear regression model. This site presents a short summary of that analysis.</p></div>
+        <div><h3>Data &amp; limitations</h3><p>The data comes from a historical Seattle Airbnb listings dataset. Missing satisfaction ratings were kept for the price charts but excluded from the regression. These are advertised nightly prices, not booking totals or current prices.</p></div>
+      </div>
+      <div class="source-note">Dataset: <a href="https://www.kaggle.com/datasets/shanelev/seattle-airbnb-listings" target="_blank" rel="noopener noreferrer">Seattle Airbnb Listings on Kaggle</a> (uploaded by Shane Lev).</div>
+    </section>
+  </main>
+
+  <footer><div class="container footer-content"><span>Seattle Airbnb Data Analysis</span><span>Python · Pandas · Scikit-learn · HTML/CSS/JavaScript</span></div></footer>
+</body>
+</html>
