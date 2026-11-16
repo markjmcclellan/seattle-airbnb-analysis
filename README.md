@@ -4,7 +4,9 @@ This project analyzes Airbnb listing prices in Seattle using Python. I used a da
 
 I also created a simple interactive dashboard to display the results.
 
-![Dashboard Preview](preview.png)
+[View Live Dashboard](https://markjmcclellan.github.io/seattle-airbnb-analysis/)
+
+![Dashboard Preview](Preview.png)
 
 ## Features
 
@@ -29,9 +31,9 @@ I also created a simple interactive dashboard to display the results.
 
 ## Viewing the Project
 
-Download the repository and open `index.html` in a browser to view the dashboard.
+[View Live Dashboard](https://markjmcclellan.github.io/seattle-airbnb-analysis/)
 
-The Python code used to process and analyze the dataset is included in `analysis.py`.
+The dashboard displays the results of my Seattle Airbnb analysis. The Python code used to process and analyze the dataset is included in analysis.py.
 
 ## Dataset
 
